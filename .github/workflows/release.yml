@@ -1,0 +1,35 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "ZmartClient-*-setup.exe"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Extract version
+        id: version
+        run: |
+          FILE_NAME=$(ls ZmartClient-*-setup.exe)
+          # Extract version using regex
+          VERSION=$(echo "$FILE_NAME" | grep -oP 'ZmartClient-(\d+\.\d+\.\d+)-setup\.exe' | sed 's/ZmartClient-\(.*\)-setup.exe/\1/')
+          echo "Version: $VERSION"
+          echo "::set-output name=version::$VERSION"
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          files: |
+            ZmartClient-${{ steps.version.outputs.version }}-setup.exe
+            ZmartClient-${{ steps.version.outputs.version }}-setup.exe.blockmap
+            latest.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
