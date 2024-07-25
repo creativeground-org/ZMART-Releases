@@ -1,8 +1,8 @@
-version: 1.0.1
+version: 1.0.2
 files:
-  - url: ZmartClient-1.0.1-setup.exe
-    sha512: svfjFtgjocv3ujnnI2N8fYBNcj70upuBCl+4K6Z30NIXcpOsKfOwTPGozDmcTUsg4jGpUC7JE0w5mk0+sd2amg==
-    size: 78820356
-path: ZmartClient-1.0.1-setup.exe
-sha512: svfjFtgjocv3ujnnI2N8fYBNcj70upuBCl+4K6Z30NIXcpOsKfOwTPGozDmcTUsg4jGpUC7JE0w5mk0+sd2amg==
-releaseDate: '2024-07-25T08:11:13.101Z'
+  - url: ZmartClient-1.0.2-setup.exe
+    sha512: EKBloNBmTYMYWygrnSwCeN+JXQeM7qIlyqw9QlkBlVzzFXg6728FiNtAsFfnoN2az8UaNeL1w+mDLE78CbinQg==
+    size: 78820184
+path: ZmartClient-1.0.2-setup.exe
+sha512: EKBloNBmTYMYWygrnSwCeN+JXQeM7qIlyqw9QlkBlVzzFXg6728FiNtAsFfnoN2az8UaNeL1w+mDLE78CbinQg==
+releaseDate: '2024-07-25T08:25:04.249Z'
