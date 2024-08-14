@@ -1,0 +1,50 @@
+name: Add ZIP to Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "ZmartClient-*-setup.exe"
+      - "ZmartClientLegacy-*-setup.exe"
+
+jobs:
+  add-zip-to-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Extract version
+        id: version
+        run: |
+          # Extract version from the ZmartClient file
+          FILE_NAME=$(ls ZmartClient-*-setup.exe)
+          VERSION=$(echo "$FILE_NAME" | grep -oP 'ZmartClient-(\d+\.\d+\.\d+)-setup\.exe' | sed 's/ZmartClient-\(.*\)-setup.exe/\1/')
+          echo "Version: $VERSION"
+          echo "::set-output name=version::$VERSION"
+
+      - name: Check for Legacy File
+        id: legacy_file
+        run: |
+          if [ -f "ZmartClientLegacy-${{ steps.version.outputs.version }}-setup.exe" ]; then
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi
+
+      - name: Create ZIP if Legacy File Exists
+        if: steps.legacy_file.outputs.exists == 'true'
+        run: |
+          zip ZmartClient-${{ steps.version.outputs.version }}-bundle.zip \
+              ZmartClient-${{ steps.version.outputs.version }}-setup.exe \
+              ZmartClientLegacy-${{ steps.version.outputs.version }}-setup.exe
+
+      - name: Upload ZIP to Latest Release
+        if: steps.legacy_file.outputs.exists == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          files: ZmartClient-${{ steps.version.outputs.version }}-bundle.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
