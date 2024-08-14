@@ -33,12 +33,22 @@ jobs:
             echo "::set-output name=exists::false"
           fi
 
+      - name: Create Directories and Organize Files
+        if: steps.legacy_file.outputs.exists == 'true'
+        run: |
+          mkdir -p For_Windows_10_and_Later
+          mkdir -p For_Windows_8_and_Earlier
+
+          # Move the files into the respective directories
+          mv ZmartClient-${{ steps.version.outputs.version }}-setup.exe For_Windows_10_and_Later/
+          mv ZmartClientLegacy-${{ steps.version.outputs.version }}-setup.exe For_Windows_8_and_Earlier/
+
       - name: Create ZIP if Legacy File Exists
         if: steps.legacy_file.outputs.exists == 'true'
         run: |
-          zip ZmartClient-${{ steps.version.outputs.version }}-bundle.zip \
-              ZmartClient-${{ steps.version.outputs.version }}-setup.exe \
-              ZmartClientLegacy-${{ steps.version.outputs.version }}-setup.exe
+          zip -r ZmartClient-${{ steps.version.outputs.version }}-bundle.zip \
+              For_Windows_10_and_Later/ \
+              For_Windows_8_and_Earlier/
 
       - name: Upload ZIP to Latest Release
         if: steps.legacy_file.outputs.exists == 'true'
