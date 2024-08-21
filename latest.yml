@@ -1,8 +1,8 @@
-version: 1.0.36
+version: 1.0.37
 files:
-  - url: ZmartClientLegacy-1.0.36-setup.exe
-    sha512: +1xb5SbHUB1nBFKoGdtUnFwfml5qw17VsUSaZAepPhgQ9aPOm3SzCEBbMOk9Pczr3VYCeji6ewyVTtRPb00t3A==
-    size: 146485014
-path: ZmartClientLegacy-1.0.36-setup.exe
-sha512: +1xb5SbHUB1nBFKoGdtUnFwfml5qw17VsUSaZAepPhgQ9aPOm3SzCEBbMOk9Pczr3VYCeji6ewyVTtRPb00t3A==
-releaseDate: '2024-08-21T13:17:50.823Z'
+  - url: ZmartClient-1.0.37-setup.exe
+    sha512: +ekdhE2t6ju6vYbIFmJ+dEfEf1wZ7MD9xndp1s5b6ivQfIkEN0AyDx97Wkjt0cSCbR3hpqH4xiFNjtO5HAQ+5Q==
+    size: 82204780
+path: ZmartClient-1.0.37-setup.exe
+sha512: +ekdhE2t6ju6vYbIFmJ+dEfEf1wZ7MD9xndp1s5b6ivQfIkEN0AyDx97Wkjt0cSCbR3hpqH4xiFNjtO5HAQ+5Q==
+releaseDate: '2024-08-21T13:32:55.044Z'
